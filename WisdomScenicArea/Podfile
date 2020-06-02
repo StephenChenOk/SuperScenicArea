@@ -1,0 +1,11 @@
+platform :ios,'8.0'
+use_frameworks!
+
+target 'WisdomScenicArea' do
+	pod 'AFNetworking','~> 2.6'
+	pod 'SDWebImage','~> 5.0'
+	pod 'AMap2DMap'
+	pod 'AMapSearch'
+	pod 'SocketRocket'
+	pod 'MBProgressHUD','~> 1.2.0'
+end

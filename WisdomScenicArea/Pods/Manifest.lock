@@ -1,0 +1,63 @@
+PODS:
+  - AFNetworking (2.7.0):
+    - AFNetworking/NSURLConnection (= 2.7.0)
+    - AFNetworking/NSURLSession (= 2.7.0)
+    - AFNetworking/Reachability (= 2.7.0)
+    - AFNetworking/Security (= 2.7.0)
+    - AFNetworking/Serialization (= 2.7.0)
+    - AFNetworking/UIKit (= 2.7.0)
+  - AFNetworking/NSURLConnection (2.7.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.7.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.7.0)
+  - AFNetworking/Security (2.7.0)
+  - AFNetworking/Serialization (2.7.0)
+  - AFNetworking/UIKit (2.7.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - AMap2DMap (5.6.1):
+    - AMapFoundation (~> 1.4)
+  - AMapFoundation (1.6.3)
+  - AMapSearch (7.3.0):
+    - AMapFoundation (~> 1.6.3)
+  - MBProgressHUD (1.2.0)
+  - SDWebImage (5.8.0):
+    - SDWebImage/Core (= 5.8.0)
+  - SDWebImage/Core (5.8.0)
+  - SocketRocket (0.5.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.6)
+  - AMap2DMap
+  - AMapSearch
+  - MBProgressHUD (~> 1.2.0)
+  - SDWebImage (~> 5.0)
+  - SocketRocket
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - AMap2DMap
+    - AMapFoundation
+    - AMapSearch
+    - MBProgressHUD
+    - SDWebImage
+    - SocketRocket
+
+SPEC CHECKSUMS:
+  AFNetworking: 8dd5f9b9691e09186393069a12cc3b5ed7c8b511
+  AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
+  AMapFoundation: 9ed923193b357ebb30a073e9fe255d3c24054d5a
+  AMapSearch: a048bcca3bf0b8083345070e1f193f814bd8dc01
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+
+PODFILE CHECKSUM: 3bc7b6e48dd4dd10c59c92c8e8162b9dfa76435c
+
+COCOAPODS: 1.9.2
