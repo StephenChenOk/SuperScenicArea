@@ -7,6 +7,7 @@
 
 #import "SceneryPushViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "ScenicDescribeUtil.h"
 
 //景物推送
 @interface SceneryPushViewController ()<CBCentralManagerDelegate>
@@ -33,10 +34,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    /** 只要一触发这句代码系统会自动检测手机蓝牙状态，你必须实现其代理方法，当然得添加<CBCentralManagerDelegate>*/
-    self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    /** 两个参数为nil, 默认扫描所有的外设，可以设置一些服务，进行过滤搜索*/
-    [self.bluetoothManager scanForPeripheralsWithServices:nil options:nil];
+//    /** 只要一触发这句代码系统会自动检测手机蓝牙状态，你必须实现其代理方法，当然得添加<CBCentralManagerDelegate>*/
+//    self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+//    /** 两个参数为nil, 默认扫描所有的外设，可以设置一些服务，进行过滤搜索*/
+//    [self.bluetoothManager scanForPeripheralsWithServices:nil options:nil];
+
 }
 
 #pragma mark 初始化view
@@ -46,7 +48,7 @@
     
     [self.view addSubview:({
         _ivPicture = [[UIImageView alloc] initWithFrame:CGRectMake(67, 117, 280, 230)];
-        _ivPicture.image = [UIImage imageNamed:@"camera_130*110"];
+        _ivPicture.image = [UIImage imageNamed:@"sjg"];
         
         _ivPicture.userInteractionEnabled = true;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click_picture)];
@@ -57,7 +59,7 @@
     
     [self.view addSubview:({
         _tvInfo = [[UITextView alloc] initWithFrame:CGRectMake(20, 379, 374, 483)];
-        _tvInfo.text = @"请稍等";
+        _tvInfo.text = [ScenicDescribeUtil getSJG];
         _tvInfo.font = [UIFont systemFontOfSize:16];
         [_tvInfo setEditable:NO];  //使其不能编辑
         //设置内边距

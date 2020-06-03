@@ -53,6 +53,8 @@
         [self initView];
         //移除之前的登入注册view
         [self.loginBtn removeFromSuperview];
+        //修改头像
+        [self changeHeadIcon];
 
         [self.view addSubview:({
             UILabel *userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(181, topbarHeight + 74, 149, 24)];
@@ -210,7 +212,25 @@
     [_loginBtn addGestureRecognizer:tapGesture];
 }
 
-#pragma mark 点击事件
+#pragma mark --改变头像
+- (void)changeHeadIcon{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *account = [user objectForKey:@"account"];
+    NSString *picturePath = [self getPicturePathWithAccount:account];
+    _headIcon.image = [[UIImage alloc] initWithContentsOfFile:picturePath];
+}
+//获取图片在沙盒中储存的地址
+- (NSString *)getPicturePathWithAccount:(NSString *)account{
+    //保存文件到沙盒
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoty = [paths lastObject];
+    //获取最终图片文件存储地址
+    NSString *picturePath = [documentsDirectoty stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",account]];
+     NSLog(@"图片地址::%@",picturePath);
+    return picturePath;
+}
+
+#pragma mark --点击事件
 //跳转登入账号界面
 - (void)gotoLogin {
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
@@ -252,5 +272,4 @@
     PersonalInfoViewController *personalInfoPage = [[PersonalInfoViewController alloc] init];
     [self.navigationController pushViewController:personalInfoPage animated:YES];
 }
-
 @end

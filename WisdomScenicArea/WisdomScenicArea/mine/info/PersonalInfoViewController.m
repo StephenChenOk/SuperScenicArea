@@ -28,6 +28,9 @@
 @property (nonatomic, strong, readwrite) UILabel *accountText;
 @property (nonatomic, strong, readwrite) UILabel *phoneText;
 
+@property (nonatomic, strong, readwrite) NSString *account;
+@property (nonatomic, strong, readwrite) NSData *pictureData;
+
 @end
 
 @implementation PersonalInfoViewController
@@ -222,14 +225,15 @@
 - (void)setUserInfo {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *name = [userDefaults objectForKey:@"username"];
-    NSString *account = [userDefaults objectForKey:@"account"];
+    _account = [userDefaults objectForKey:@"account"];
     NSString *phoneNum = [userDefaults objectForKey:@"phoneNum"];
-//    NSString *headUrl = [userDefaults objectForKey:@"headURL"];
+    NSString *picturePath = [self getPicturePath];
     
     _nameText.text = name;
-    _accountText.text = account;
+    _accountText.text = _account;
     _phoneText.text = phoneNum;
-//    [_headIcon sd_setImageWithURL:[NSURL URLWithString:headUrl] placeholderImage:[UIImage imageNamed:@"headIcon"]];
+    _headIcon.image = [[UIImage alloc] initWithContentsOfFile:picturePath];
+    //[_headIcon sd_setImageWithURL:[NSURL URLWithString:picturePath] placeholderImage:[UIImage imageNamed:@"headIcon"]];
 }
 
 #pragma mark touch事件回调
@@ -240,21 +244,21 @@
 #pragma mark 点击事件
 //点击头像
 - (void)gotoHeadIconPage {
-//    NSLog(@"点击头像");
-//    //1 相册中获取
-//    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
-//        //实例化
-//        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-//        //设置资源来源(相册、相机、图库之一)
-//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//        //设置代理
-//        imagePickerVC.delegate = self;
-//        //是否允许编辑
-//        imagePickerVC.allowsEditing = YES;
-//        [self presentViewController:imagePickerVC animated:YES completion:nil];
-//    }else{
-//        NSLog(@"相册资源不可用");
-//    }
+    
+    //1 相册中获取
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]){
+        //实例化
+        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+        //设置资源来源(相册、相机、图库之一)
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        //设置代理
+        imagePickerVC.delegate = self;
+        //是否允许编辑
+        imagePickerVC.allowsEditing = YES;
+        [self presentViewController:imagePickerVC animated:YES completion:nil];
+    }else{
+        NSLog(@"相册资源不可用");
+    }
     
     //2 相机中获取(模拟器无摄像头可用？)
 //    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
@@ -300,35 +304,14 @@
     [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"已退出当前账号");
 }
-
 #pragma mark UIImagePickerController代理回调
 //选择图片成功回调
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info{
-    NSURL *url =[info objectForKey:UIImagePickerControllerImageURL];    //获取图片地址url，不是真实地址，实用sd_webimage无法加载成功
-    //UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];  //获取原图
     UIImage *editImage = [info objectForKey:UIImagePickerControllerEditedImage];    //获取裁剪后的图片
-    NSString *imageName = url.path.lastPathComponent;
-    //将图片保存到本地沙盒中
-    //1 找到本地沙盒中的Document目录（存放一些较大的文件）
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //2 在目录下创建一个图片，返回路径
-    NSString *imagePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:imageName];
-    //3 写入图片资源
-    if([UIImagePNGRepresentation(editImage) writeToFile:imagePath atomically:YES]){
-        NSLog(@"保存头像成功");
-    }else{
-        NSLog(@"保存头像失败");
-    }
-    
-    UserUtil *util = [[UserUtil alloc] init];
-    BOOL isModified = [util modifyHeadIcon:imagePath];
-    if(isModified){
-        NSLog(@"修改头像成功");
-        //更换头像
-        _headIcon.image = editImage;
-    }else{
-        NSLog(@"修改头像出错");
-    }
+    _headIcon.image = editImage;
+
+    //将图片以账号名存入沙盒
+    [self savePicture:editImage withAccount:_account];
     
     //退出界面
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -338,6 +321,30 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     //退出界面
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+//将图片保存到沙盒中
+- (void)savePicture:(UIImage *)picture withAccount:(NSString *)account {
+    NSString *picturePath = [self getPicturePath];
+    //将图片数据写入图片文件
+    _pictureData = UIImagePNGRepresentation(picture);
+    if ([_pictureData writeToFile:picturePath atomically:YES]) {
+        NSLog(@"写入图片成功");
+        
+    } else {
+        NSLog(@"写入图片失败");
+    }
+}
+
+//获取图片在沙盒中储存的地址
+- (NSString *)getPicturePath{
+    //保存文件到沙盒
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectoty = [paths lastObject];
+    //获取最终图片文件存储地址
+    NSString *picturePath = [documentsDirectoty stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg",_account]];
+     NSLog(@"图片地址::%@",picturePath);
+    return picturePath;
 }
 
 @end
