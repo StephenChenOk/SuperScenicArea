@@ -109,19 +109,19 @@
                                                             handler:^(UIAlertAction *action) {
         NSLog(@"拍照");
         //2 相机中获取(模拟器无摄像头可用？)
-        //    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-        //        //实例化
-        //        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        //        //设置资源来源(相册、相机、图库之一)
-        //        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        //        //设置代理
-        //        imagePickerVC.delegate = self;
-        //        //相机获取媒体的类型（相机、录制视频）
-        //        imagePickerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-        //        [self presentViewController:imagePickerVC animated:YES completion:nil];
-        //    }else{
-        //        NSLog(@"无摄像头可用");
-        //    }
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+                //实例化
+                UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+                //设置资源来源(相册、相机、图库之一)
+                imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+                //设置代理
+                imagePickerVC.delegate = self;
+                //相机获取媒体的类型（相机、录制视频）
+                imagePickerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+                [self presentViewController:imagePickerVC animated:YES completion:nil];
+            }else{
+                NSLog(@"无摄像头可用");
+            }
     }];
     UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction *action) {

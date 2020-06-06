@@ -8,6 +8,7 @@
 
 #import "ViewPointTableViewCell.h"
 #import "ViewPointItem.h"
+#import "ScreenUtil.h"
 
 @interface ViewPointTableViewCell ()
 
@@ -29,24 +30,24 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         [self.contentView addSubview:({
-            self.img = [[UIImageView alloc] initWithFrame:CGRectMake(10, 20, 120, 80)];
+            self.img = [[UIImageView alloc] initWithFrame:UIRect(10, 20, 120, 80)];
             self.img.contentMode = UIViewContentModeScaleAspectFit;
-            self.img.layer.cornerRadius = 5;
+            self.img.layer.cornerRadius = UI(5);
             self.img.layer.masksToBounds = YES;
             self.img;
         })];
 
         [self.contentView addSubview:({
-            self.name = [[UILabel alloc] initWithFrame:CGRectMake(150, 11, 220, 20)];
-            self.name.font = [UIFont systemFontOfSize:15];
+            self.name = [[UILabel alloc] initWithFrame:UIRect(150, 11, 220, 20)];
+            self.name.font = [UIFont systemFontOfSize:UI(15)];
             self.name.textColor = [UIColor blackColor];
             self.name.lineBreakMode = NSLineBreakByTruncatingTail;  //太长时在尾巴处截断
             self.name;
         })];
 
         [self.contentView addSubview:({
-            self.address = [[UILabel alloc] initWithFrame:CGRectMake(150, 37, 220, 18)];
-            self.address.font = [UIFont systemFontOfSize:14];
+            self.address = [[UILabel alloc] initWithFrame:UIRect(150, 37, 220, 18)];
+            self.address.font = [UIFont systemFontOfSize:UI(14)];
             self.address.textColor = [UIColor darkGrayColor];
             self.address.numberOfLines = 2;
             self.address.lineBreakMode = NSLineBreakByTruncatingTail;  //太长时在尾巴处截断
@@ -54,47 +55,47 @@
         })];
 
         [self.contentView addSubview:({
-            UIImageView *scoreImg = [[UIImageView alloc] initWithFrame:CGRectMake(150, 67, 20, 20)];
+            UIImageView *scoreImg = [[UIImageView alloc] initWithFrame:UIRect(150, 67, 20, 20)];
             scoreImg.contentMode = UIViewContentModeScaleAspectFit;
             [scoreImg setImage:[UIImage imageNamed:@"score_viewpoint"]];
             scoreImg;
         })];
 
         [self.contentView addSubview:({
-            self.scoreLable = [[UILabel alloc] initWithFrame:CGRectMake(178, 68, 60, 15)];
-            self.scoreLable.font = [UIFont systemFontOfSize:13];
+            self.scoreLable = [[UILabel alloc] initWithFrame:UIRect(178, 68, 60, 15)];
+            self.scoreLable.font = [UIFont systemFontOfSize:UI(13)];
             self.scoreLable.textColor = [UIColor grayColor];
             self.scoreLable.lineBreakMode = NSLineBreakByTruncatingTail;         //太长时在尾巴处截断
             self.scoreLable;
         })];
 
         [self.contentView addSubview:({
-            UIImageView *distanceImg = [[UIImageView alloc] initWithFrame:CGRectMake(150, 92, 20, 20)];
+            UIImageView *distanceImg = [[UIImageView alloc] initWithFrame:UIRect(150, 92, 20, 20)];
             distanceImg.contentMode = UIViewContentModeScaleAspectFit;
             [distanceImg setImage:[UIImage imageNamed:@"distance_viewpoint"]];
             distanceImg;
         })];
 
         [self.contentView addSubview:({
-            self.distanceLable = [[UILabel alloc] initWithFrame:CGRectMake(178, 94, 100, 15)];
-            self.distanceLable.font = [UIFont systemFontOfSize:13];
+            self.distanceLable = [[UILabel alloc] initWithFrame:UIRect(178, 94, 100, 15)];
+            self.distanceLable.font = [UIFont systemFontOfSize:UI(13)];
             self.distanceLable.textColor = [UIColor grayColor];
             self.distanceLable.lineBreakMode = NSLineBreakByTruncatingTail;       //太长时在尾巴处截断
             self.distanceLable;
         })];
         
         [self.contentView addSubview:({
-            self.detailBox = [[UIView alloc] initWithFrame:CGRectMake(356, 64, 50, 50)];
+            self.detailBox = [[UIView alloc] initWithFrame:UIRect(356, 64, 50, 50)];
             
             [self.detailBox addSubview:({
-                UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(21, 10, 27, 16)];
-                label.font = [UIFont systemFontOfSize:13];
+                UILabel *label = [[UILabel alloc] initWithFrame:UIRect(21, 10, 27, 16)];
+                label.font = [UIFont systemFontOfSize:UI(13)];
                 label.textColor = [UIColor grayColor];
                 label.text = @"详情";
                 label;
             })];
             [self.detailBox addSubview:({
-                UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(22, 21, 24, 24)];
+                UIImageView *image = [[UIImageView alloc] initWithFrame:UIRect(22, 21, 24, 24)];
                 image.image = [UIImage imageNamed:@"detail"];
                 image;
             })];

@@ -12,6 +12,7 @@
 #import "ViewPointDetailViewController.h"
 #import "ViewPointItemInitUtil.h"
 #import "MapViewController.h"
+#import "ScreenUtil.h"
 
 @interface ViewPointViewController ()<UITableViewDelegate, UITableViewDataSource,DetailDelegate>
 
@@ -45,7 +46,7 @@
 
 //每行的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    return UI(120);
 }
 
 //点击item

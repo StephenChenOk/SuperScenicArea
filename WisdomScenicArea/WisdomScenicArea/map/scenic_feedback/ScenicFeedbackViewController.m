@@ -96,7 +96,7 @@
         _ivPicture.image = [UIImage imageNamed:@"camera"];
 
         _ivPicture.userInteractionEnabled = true;
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(get_picture)];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showSheet)];
         [_ivPicture addGestureRecognizer:tapGesture];
 
         _ivPicture;

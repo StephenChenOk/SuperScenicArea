@@ -8,6 +8,7 @@
 
 #import "LocationViewController.h"
 #import "ViewPointViewController.h"
+#import "ScreenUtil.h"
 
 @interface LocationViewController ()
 
@@ -19,8 +20,6 @@
     self = [super init];
     if(self){
         self.view.backgroundColor = [UIColor whiteColor];
-        
-        
         
         self.tabBarItem.title = @"目的地";
         self.tabBarItem.image = [UIImage imageNamed:@"location"];
@@ -38,12 +37,12 @@
 #pragma mark - 初始化
 - (void)initView{
     //1 上海
-    UIImageView *shanghai_img = [[UIImageView alloc] initWithFrame:CGRectMake(67, 111, 280, 170)];
+    UIImageView *shanghai_img = [[UIImageView alloc] initWithFrame:UIRect(67, 111, 280, 170)];
     [shanghai_img setImage:[UIImage imageNamed:@"shang_hai"]];
-    shanghai_img.layer.cornerRadius = 10;
+    shanghai_img.layer.cornerRadius = UI(10);
     shanghai_img.layer.masksToBounds = YES;
     
-    UILabel *shanghai_lable = [[UILabel alloc] initWithFrame:CGRectMake(186, 285, 45, 20)];
+    UILabel *shanghai_lable = [[UILabel alloc] initWithFrame:UIRect(186, 285, 45, 20)];
     shanghai_lable.text = @"上海";
     
     shanghai_img.userInteractionEnabled = YES; //需要设置，否则无法响应点击事件
@@ -52,12 +51,12 @@
     [self.view addSubview:shanghai_lable];
     
     //2 重庆
-    UIImageView *chongqi_img = [[UIImageView alloc] initWithFrame:CGRectMake(67, 351, 280, 170)];
+    UIImageView *chongqi_img = [[UIImageView alloc] initWithFrame:UIRect(67, 351, 280, 170)];
     [chongqi_img setImage:[UIImage imageNamed:@"chongqi"]];
-    chongqi_img.layer.cornerRadius = 10;
+    chongqi_img.layer.cornerRadius = UI(10);
     chongqi_img.layer.masksToBounds = YES;
     
-    UILabel *chongqi_lable = [[UILabel alloc] initWithFrame:CGRectMake(186, 527, 45, 20)];
+    UILabel *chongqi_lable = [[UILabel alloc] initWithFrame:UIRect(186, 527, 45, 20)];
     chongqi_lable.text = @"重庆";
     
     chongqi_img.userInteractionEnabled = YES; //需要设置，否则无法响应点击事件
@@ -66,12 +65,12 @@
     [self.view addSubview:chongqi_lable];
     
     //3 北京
-    UIImageView *beijing_img = [[UIImageView alloc] initWithFrame:CGRectMake(67, 589, 280, 170)];
+    UIImageView *beijing_img = [[UIImageView alloc] initWithFrame:UIRect(67, 589, 280, 170)];
     [beijing_img setImage:[UIImage imageNamed:@"beijing"]];
-    beijing_img.layer.cornerRadius = 10;
+    beijing_img.layer.cornerRadius = UI(10);
     beijing_img.layer.masksToBounds = YES;
     
-    UILabel *beijing_lable = [[UILabel alloc] initWithFrame:CGRectMake(186, 762, 45, 20)];
+    UILabel *beijing_lable = [[UILabel alloc] initWithFrame:UIRect(186, 762, 45, 20)];
     beijing_lable.text = @"北京";
     
     beijing_img.userInteractionEnabled = YES; //需要设置，否则无法响应点击事件

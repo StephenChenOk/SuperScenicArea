@@ -7,6 +7,7 @@
 //
 
 #import "BannerView.h"
+#import "ScreenUtil.h"
 
 @interface BannerView ()<UIScrollViewDelegate>
 {
@@ -71,33 +72,34 @@
     //3求得将要变换的点
     CGPoint endPoint = CGPointMake(point.x + _width, 0);
     //4判断是否到尽头根据情况进行轮播
+    __weak typeof(self) weakSelf = self;
     if (endPoint.x == (self.imageArray.count - 1) * _width) {
         [UIView animateWithDuration:0.25 animations:^{
-            _scrollView.contentOffset = CGPointMake(endPoint.x, 0);
+            weakSelf.scrollView.contentOffset = CGPointMake(endPoint.x, 0);
         } completion:^(BOOL finished) {
             //动画完成的block
-            _scrollView.contentOffset = CGPointMake(_width, 0);
-            CGPoint realEnd = _scrollView.contentOffset;
+            weakSelf.scrollView.contentOffset = CGPointMake(weakSelf.width, 0);
+            CGPoint realEnd = weakSelf.scrollView.contentOffset;
             //取一遍页码数
             _currentPage = realEnd.x / _width;
-            _pageControl.currentPage = _currentPage - 1;
+            weakSelf.pageControl.currentPage = _currentPage - 1;
         }];
     } else {
         //0.25s中更改一个图片
         [UIView animateWithDuration:0.25 animations:^{
-            _scrollView.contentOffset = endPoint;
+            weakSelf.scrollView.contentOffset = endPoint;
         } completion:^(BOOL finished) {
         }];
-        CGPoint realEnd = _scrollView.contentOffset;
+        CGPoint realEnd = weakSelf.scrollView.contentOffset;
         //取一遍页码数
         _currentPage = realEnd.x / _width;
-        _pageControl.currentPage = _currentPage - 1;
+        weakSelf.pageControl.currentPage = _currentPage - 1;
     }
 }
 
 //创建页码指示器
 - (void)createPageControl {
-    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(_width - (_width / 2 + 45), _height - 30, 100, 30)];
+    _pageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(_width - (_width / 2 + UI(50)), _height - UI(30), UI(100), UI(30))];
     //_pageControl.centerX = _width / 2;
     _pageControl.numberOfPages = self.imageArray.count - 2;
     //_pageControl.pageIndicatorTintColor = WP_GRAY_COLOR;
@@ -109,10 +111,10 @@
 //创建轮播图的title
 - (void)createTitle {
     //初始化titleLabel
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _height - 50, 414, 30)];
-    _titleLabel.textAlignment = UITextAlignmentCenter;     // 居中对齐
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, _height - UI(50), UI(414), UI(30))];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;     // 居中对齐
     _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.font = [UIFont systemFontOfSize:20];
+    _titleLabel.font = [UIFont systemFontOfSize:UI(20)];
     [self addSubview:_titleLabel];
     //初始化title数据
     _titleData = [NSArray arrayWithObjects:@"象鼻山", @"水晶宫", @"狮岭朝霞", @"八路军桂林办事处纪念馆", @"普贤塔", nil];
@@ -121,10 +123,10 @@
 
 //创建滚动视图
 - (void)createSro {
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, _width, _height)];
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(UI(0), UI(0), _width, _height)];
     _scrollView.contentSize = CGSizeMake(_width * self.imageArray.count, _height);
     for (int i = 0; i < self.imageArray.count; i++) {
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * _width, 0, _width, _height)];
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i * _width, UI(0), _width, _height)];
 //    imageView.image = [UIImage imageNamed:self.imageArray[i]];
 //        [imageView sd_setImageWithURL:self.imageArray[i] placeholderImage:[UIImage imageNamed:@"home_banner_blank"]];
         [imageView setImage:[UIImage imageNamed:self.imageArray[i]]];
