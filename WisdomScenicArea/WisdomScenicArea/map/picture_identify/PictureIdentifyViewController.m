@@ -11,6 +11,7 @@
 #import <SDWebImage/SDWebImage.h>
 #import "ScenicDescribeUtil.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "ScreenUtil.h"
 
 //拍照识别服务器url
 #define SCENIC_IDENTIFY_SERVER_URL "http://47.102.153.115:8989/infer"
@@ -46,21 +47,23 @@
     self.navigationItem.title = @"拍照识别";
 
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(135, 115, 145, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(135, STATUSBAR_HEIGHT + 44 + 27, 145, 21)];
         label.text = @"一处景点 一个故事";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(135, 160, 145, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(135, STATUSBAR_HEIGHT + 44 + 72, 145, 21)];
         label.text = @"拍照识别 知晓故事";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        UIView *box = [[UIView alloc] initWithFrame:CGRectMake(107, 203, 200, 180)];
+        UIView *box = [[UIView alloc] initWithFrame:UIRect(107, STATUSBAR_HEIGHT + 44 + 115, 200, 180)];
         box.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
 
         [box addSubview:({
-            _ivPicture = [[UIImageView alloc] initWithFrame:CGRectMake(10, 7, 180, 165)];
+            _ivPicture = [[UIImageView alloc] initWithFrame:UIRect(10, 7, 180, 165)];
             _ivPicture.image = [UIImage imageNamed:@"camera_130*110"];
 
             _ivPicture.userInteractionEnabled = true;
@@ -73,12 +76,12 @@
         box;
     })];
     [self.view addSubview:({
-        _tvInfo = [[UITextView alloc] initWithFrame:CGRectMake(20, 420, 374, 443)];
+        _tvInfo = [[UITextView alloc] initWithFrame:CGRectMake(UI(20), UI(STATUSBAR_HEIGHT + 44 + 332), UI(374), self.view.bounds.size.height - UI(STATUSBAR_HEIGHT + 44 + 332) - UI(20))];
         _tvInfo.text = @"未进行识别";
-        _tvInfo.font = [UIFont systemFontOfSize:16];
-
+        _tvInfo.font = [UIFont systemFontOfSize:UI(17)];
+        _tvInfo.editable = NO;
         //设置内边距
-        _tvInfo.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        _tvInfo.textContainerInset = UIEdgeInsetsMake(UI(5), UI(5), UI(5), UI(5));
 
         //设置圆角半径为方形边长一半
         [_tvInfo.layer setCornerRadius:10];
@@ -109,19 +112,19 @@
                                                             handler:^(UIAlertAction *action) {
         NSLog(@"拍照");
         //2 相机中获取(模拟器无摄像头可用？)
-            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-                //实例化
-                UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-                //设置资源来源(相册、相机、图库之一)
-                imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-                //设置代理
-                imagePickerVC.delegate = self;
-                //相机获取媒体的类型（相机、录制视频）
-                imagePickerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
-                [self presentViewController:imagePickerVC animated:YES completion:nil];
-            }else{
-                NSLog(@"无摄像头可用");
-            }
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            //实例化
+            UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+            //设置资源来源(相册、相机、图库之一)
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+            //设置代理
+            imagePickerVC.delegate = self;
+            //相机获取媒体的类型（相机、录制视频）
+            imagePickerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        } else {
+            NSLog(@"无摄像头可用");
+        }
     }];
     UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction *action) {

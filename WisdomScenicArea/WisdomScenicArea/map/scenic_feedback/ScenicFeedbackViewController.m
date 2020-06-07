@@ -10,6 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <SDWebImage/SDWebImage.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "ScreenUtil.h"
 
 #define FEEDBACK_SERVER_URL "http://47.102.153.115:8080/isa/feedback"
 
@@ -48,51 +49,54 @@
     self.navigationItem.title = @"景区反馈";
 
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 113, 70, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 25, 70, 21)];
         label.text = @"地点名称";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        _tfName = [[UITextField alloc] initWithFrame:CGRectMake(98, 108, 296, 34)];
+        _tfName = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 20, 296, 34)];
         _tfName.placeholder = @"输入这个地点的名称";
         _tfName.borderStyle = UITextBorderStyleNone;
         _tfName;
     })];
     [self.view addSubview:({
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 152, 394, 1)];
+        UIView *line = [[UIView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 64, 394, 1)];
         line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
         line;
     })];
 
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 171, 70, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 83, 70, 21)];
         label.text = @"所在位置";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        _tfLocation = [[UITextField alloc] initWithFrame:CGRectMake(98, 166, 296, 34)];
+        _tfLocation = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 78, 296, 34)];
         _tfLocation.placeholder = @"输入这个地点的详细位置";
         _tfLocation;
     })];
     [self.view addSubview:({
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 209, 394, 8)];
+        UIView *line = [[UIView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 121, 394, 8)];
         line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
         line;
     })];
 
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 228, 70, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 140, 70, 21)];
         label.text = @"添加图片";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 264, 394, 1)];
+        UIView *line = [[UIView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 176, 394, 1)];
         line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
         line;
     })];
 
     [self.view addSubview:({
-        _ivPicture = [[UIImageView alloc] initWithFrame:CGRectMake(20, 275, 60, 55)];
+        _ivPicture = [[UIImageView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 187, 60, 55)];
         _ivPicture.image = [UIImage imageNamed:@"camera"];
 
         _ivPicture.userInteractionEnabled = true;
@@ -102,41 +106,43 @@
         _ivPicture;
     })];
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 337, 374, 50)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 249, 374, 50)];
         label.text = @"请对准要反馈的地点进行拍照，上传真实的照片能提高反馈的成功率";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label.numberOfLines = 2;
         label.font = [UIFont systemFontOfSize:15];
         label;
     })];
     [self.view addSubview:({
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 394, 394, 8)];
+        UIView *line = [[UIView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 306, 394, 8)];
         line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
         line;
     })];
 
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 415, 70, 21)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 327, 70, 21)];
         label.text = @"问题描述";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 450, 394, 1)];
+        UIView *line = [[UIView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 362, 394, 1)];
         line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
         line;
     })];
 
     [self.view addSubview:({
-        _tvContent = [[UITextView alloc] initWithFrame:CGRectMake(20, 466, 374, 100)];
+        _tvContent = [[UITextView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 378, 374, 100)];
         _tvContent.text = @"请输入您要反馈的内容";
         _tvContent.textColor = [UIColor grayColor];
         _tvContent.delegate = self;
-        _tvContent.font = [UIFont systemFontOfSize:16];
+        _tvContent.font = [UIFont systemFontOfSize:UI(16)];
 
         //设置内边距
-        _tvContent.textContainerInset = UIEdgeInsetsMake(5, 5, 5, 5);
+        _tvContent.textContainerInset = UIEdgeInsetsMake(UI(5), UI(5), UI(5), UI(5));
 
         //设置圆角半径为方形边长一半
-        [_tvContent.layer setCornerRadius:10];
+        [_tvContent.layer setCornerRadius:UI(10)];
         [_tvContent.layer setMasksToBounds:YES];
 
         //设置边框宽度和颜色
@@ -146,33 +152,34 @@
         _tvContent;
     })];
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(285, 572, 135, 17)];
+        UILabel *label = [[UILabel alloc] initWithFrame:UIRect(285, STATUSBAR_HEIGHT + 44 + 484, 135, 17)];
         label.text = @"输入5-300个字符";
-        label.font = [UIFont systemFontOfSize:13];
+        label.font = [UIFont systemFontOfSize:UI(13)];
         label;
     })];
     [self.view addSubview:({
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 600, 394, 8)];
+        UIView *line = [[UIView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 512, 394, 8)];
         line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
         line;
     })];
 
     [self.view addSubview:({
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 635, 70, 21)];
+        UILabel *label = [[UILabel alloc]initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 547, 70, 21)];
         label.text = @"联系方式";
+        label.font = [UIFont systemFontOfSize:UI(17)];
         label;
     })];
     [self.view addSubview:({
-        _tfPhoneNum = [[UITextField alloc] initWithFrame:CGRectMake(98, 630, 296, 34)];
+        _tfPhoneNum = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 542, 296, 34)];
         _tfPhoneNum.placeholder = @"请输入您的联系方式";
         _tfPhoneNum;
     })];
 
     [self.view addSubview:({
-        _btnSubmit = [[UIButton alloc] initWithFrame:CGRectMake(57, 700, 300, 45)];
+        _btnSubmit = [[UIButton alloc] initWithFrame:UIRect(57, STATUSBAR_HEIGHT + 44 + 600, 300, 45)];
         _btnSubmit.backgroundColor = [UIColor colorWithRGB:0x5abce3 lpha:0.9];
         [_btnSubmit setTitle:@"提交" forState:UIControlStateNormal];
-        _btnSubmit.layer.cornerRadius = 10;
+        _btnSubmit.layer.cornerRadius = UI(10);
         _btnSubmit.layer.masksToBounds = YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(submit)];
         [_btnSubmit addGestureRecognizer:tapGesture];
@@ -305,6 +312,17 @@
         textView.text = @"";
         textView.textColor = [UIColor blackColor];
     }
+}
+
+//收起键盘
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];   //取消第一响应者，也就是隐藏键盘
+
+        return NO;   //不对 "\n"作出输入反应
+    }
+
+    return YES;
 }
 
 @end

@@ -48,12 +48,13 @@
 //初始化景点详情信息
 - (void)initDetailData:(ViewPointItem *)item {
     self.navigationItem.title = item.name;
+    self.navigationItem.leftBarButtonItem.width = 10;
     self.ivImage.image = [UIImage imageNamed:item.imgUrl];
 
     //根据label中内容的大小自适应label大小
     self.lbInfo.text = item.detailInfo;
-    CGSize labelSize = [item.detailInfo boundingRectWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width * 3) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  | NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:17] } context:nil].size;
-    self.lbInfo.frame = UIRect(3, 551, ceil(labelSize.width-3), ceil(labelSize.height + 100) );
+    CGSize labelSize = [item.detailInfo boundingRectWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width * 3) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  | NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:UI(17)] } context:nil].size;
+    self.lbInfo.frame = CGRectMake(UI(3), UI(551), ceil(labelSize.width-3), ceil(labelSize.height + 100) );
 
     
     //设置scrollView内容的大小
@@ -165,6 +166,7 @@
             _lbInfo = [[QFLabelView alloc] init];
             _lbInfo.numberOfLines = 0;
             _lbInfo.font = [UIFont systemFontOfSize:UI(17)];
+            _lbInfo.enabled = NO;
             _lbInfo;
         })];
 

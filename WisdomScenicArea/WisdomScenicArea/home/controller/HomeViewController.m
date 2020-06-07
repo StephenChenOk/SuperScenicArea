@@ -35,40 +35,40 @@
         self.tabBarItem.selectedImage = [UIImage imageNamed:@"home_selected"];
 
         [self.view addSubview:({
-            UIImageView *weatherImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(44), UI(356), UI(50), UI(50))];
+            UIImageView *weatherImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(44), UI(STATUSBAR_HEIGHT+44+268), UI(50), UI(50))];
             [weatherImg setImage:[UIImage imageNamed:@"weather_logo"]];
             weatherImg;
         })];
         [self.view addSubview:({
-            UILabel *weatherLabel = [[UILabel alloc] initWithFrame:CGRectMake(UI(36), UI(409), UI(66), UI(20))];
+            UILabel *weatherLabel = [[UILabel alloc] initWithFrame:CGRectMake(UI(36), UI(STATUSBAR_HEIGHT+44+321), UI(66), UI(20))];
             weatherLabel.text = @"实时天气";
             weatherLabel.font = [UIFont systemFontOfSize:UI(16)];
             weatherLabel;
         })];
         [self.view addSubview:({
-            UIImageView *weatherImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(180), UI(356), UI(50), UI(50))];
+            UIImageView *weatherImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(180), UI(STATUSBAR_HEIGHT+44+268), UI(50), UI(50))];
             [weatherImg setImage:[UIImage imageNamed:@"translation_logo"]];
             weatherImg;
         })];
         [self.view addSubview:({
-            UILabel *translationLabel = [[UILabel alloc] initWithFrame:CGRectMake(UI(174), UI(409), UI(66), UI(20))];
+            UILabel *translationLabel = [[UILabel alloc] initWithFrame:CGRectMake(UI(174), UI(STATUSBAR_HEIGHT+44+321), UI(66), UI(20))];
             translationLabel.text = @"在线翻译";
             translationLabel.font = [UIFont systemFontOfSize:UI(16)];
             translationLabel;
         })];
         [self.view addSubview:({
-            UIImageView *wcImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(318), UI(356), UI(50), UI(50))];
+            UIImageView *wcImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(318), UI(STATUSBAR_HEIGHT+44+268), UI(50), UI(50))];
             [wcImg setImage:[UIImage imageNamed:@"wc_logo"]];
             wcImg;
         })];
         [self.view addSubview:({
-            UILabel *wcLabel = [[UILabel alloc] initWithFrame:CGRectMake(UI(310), UI(409), UI(66), UI(20))];
+            UILabel *wcLabel = [[UILabel alloc] initWithFrame:CGRectMake(UI(310), UI(STATUSBAR_HEIGHT+44+321), UI(66), UI(20))];
             wcLabel.text = @"附近厕所";
             wcLabel.font = [UIFont systemFontOfSize:UI(16)];
             wcLabel;
         })];
         [self.view addSubview:({
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(UI(0), UI(445), UI(414), UI(1))];
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(UI(0), UI(STATUSBAR_HEIGHT+44+357), UI(414), UI(2))];
             line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
             line;
         })];
@@ -88,14 +88,14 @@
 #pragma mark initView
 //初始化轮播图
 - (void)initBannerView {
-    BannerView *banner = [[BannerView alloc]initWithFrame:UIRect(0, STATUSBARHEIGHT+44, 414, 250) andImageNameArray:self.bannerImage andIsRunning:YES];
+    BannerView *banner = [[BannerView alloc]initWithFrame:UIRect(0, STATUSBAR_HEIGHT+44, 414, 250) andImageNameArray:self.bannerImage andIsRunning:YES];
     banner.delegate = self;
     [self.view addSubview:banner];
 }
 
 //初始化tableView
 - (void)initTableView {
-    _tableView = [[UITableView alloc] initWithFrame:UIRect(0, 445, 414, 360)];
+    _tableView = [[UITableView alloc] initWithFrame:UIRect(0, STATUSBAR_HEIGHT+44+357, 414, 360)];
     //设置当底下没内容后，不显示任何东西
     _tableView.tableFooterView = [[UIView alloc] init];
     _tableView.dataSource = self;

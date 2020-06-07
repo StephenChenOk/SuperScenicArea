@@ -15,6 +15,7 @@
 #import <SocketRocket/SocketRocket.h>
 #import "AStarUtils.h"
 #import <CoreBluetooth/CoreBluetooth.h>
+#import "ScreenUtil.h"
 
 //websocket服务器url
 #define RATE_FLOW_URL "ws://47.102.153.115:8080/isa/websocket"
@@ -94,13 +95,13 @@
     //初始化右侧功能模块界面
     //box
     [self.view addSubview:({
-        UIView *box = [[UIView alloc] initWithFrame:CGRectMake(344, 130, 50, 224)];
+        UIView *box = [[UIView alloc] initWithFrame:UIRect(344, 130, 50, 224)];
         box.backgroundColor = [UIColor whiteColor];
-        box.layer.cornerRadius = 5;
+        box.layer.cornerRadius = UI(5);
         box.layer.masksToBounds = YES;
         //拍照识别
         [box addSubview:({
-            UIImageView *camera = [[UIImageView alloc] initWithFrame:CGRectMake(5, 10, 40, 40)];
+            UIImageView *camera = [[UIImageView alloc] initWithFrame:UIRect(5, 10, 40, 40)];
             camera.image = [UIImage imageNamed:@"camera"];
             camera.userInteractionEnabled = true;
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picture_recognition)];
@@ -108,8 +109,8 @@
             camera;
         })];
         [box addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 53, 50, 17)];
-            label.font = [UIFont systemFontOfSize:10];
+            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(0, 53, 50, 17)];
+            label.font = [UIFont systemFontOfSize:UI(10)];
             label.textColor = [UIColor darkGrayColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.text = @"拍照识别";
@@ -119,14 +120,14 @@
             label;
         })];
         [box addSubview:({
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(4, 74, 42, 1)];
+            UIView *line = [[UIView alloc] initWithFrame:UIRect(4, 74, 42, 2)];
             line.backgroundColor = [UIColor lightGrayColor];
             line;
         })];
 
         //路线规划
         [box addSubview:({
-            UIImageView *road = [[UIImageView alloc] initWithFrame:CGRectMake(5, 85, 40, 40)];
+            UIImageView *road = [[UIImageView alloc] initWithFrame:UIRect(5, 85, 40, 40)];
             road.image = [UIImage imageNamed:@"road"];
             road.userInteractionEnabled = true;
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(road_planning)];
@@ -134,8 +135,8 @@
             road;
         })];
         [box addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 128, 50, 17)];
-            label.font = [UIFont systemFontOfSize:10];
+            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(0, 128, 50, 17)];
+            label.font = [UIFont systemFontOfSize:UI(10)];
             label.textColor = [UIColor darkGrayColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.text = @"路线规划";
@@ -145,14 +146,14 @@
             label;
         })];
         [box addSubview:({
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(4, 148, 42, 1)];
+            UIView *line = [[UIView alloc] initWithFrame:UIRect(4, 148, 42, 2)];
             line.backgroundColor = [UIColor lightGrayColor];
             line;
         })];
 
         //景区反馈
         [box addSubview:({
-            UIImageView *feedback = [[UIImageView alloc] initWithFrame:CGRectMake(5, 158, 40, 40)];
+            UIImageView *feedback = [[UIImageView alloc] initWithFrame:UIRect(5, 158, 40, 40)];
             feedback.image = [UIImage imageNamed:@"feedback"];
             feedback.userInteractionEnabled = true;
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scenic_feedback)];
@@ -160,8 +161,8 @@
             feedback;
         })];
         [box addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 201, 50, 17)];
-            label.font = [UIFont systemFontOfSize:10];
+            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(0, 201, 50, 17)];
+            label.font = [UIFont systemFontOfSize:UI(10)];
             label.textColor = [UIColor darkGrayColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.text = @"景区反馈";
@@ -175,13 +176,13 @@
     })];
     //景物推送box
     [self.view addSubview:({
-        UIView *box = [[UIView alloc] initWithFrame:CGRectMake(344, 380, 50, 70)];
+        UIView *box = [[UIView alloc] initWithFrame:UIRect(344, 380, 50, 70)];
         box.backgroundColor = [UIColor whiteColor];
-        box.layer.cornerRadius = 5;
+        box.layer.cornerRadius = UI(5);
         box.layer.masksToBounds = YES;
 
         [box addSubview:({
-            UIImageView *push = [[UIImageView alloc] initWithFrame:CGRectMake(5, 8, 40, 40)];
+            UIImageView *push = [[UIImageView alloc] initWithFrame:UIRect(5, 8, 40, 40)];
             push.image = [UIImage imageNamed:@"senic_push"];
             push.userInteractionEnabled = true;
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scenery_push)];
@@ -190,8 +191,8 @@
         })];
 
         [box addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 50, 50, 17)];
-            label.font = [UIFont systemFontOfSize:10];
+            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(0, 50, 50, 17)];
+            label.font = [UIFont systemFontOfSize:UI(10)];
             label.textAlignment = NSTextAlignmentCenter;
             label.text = @"景物推送";
             label.textColor = [UIColor darkGrayColor];
@@ -206,11 +207,11 @@
 
     //放大缩小box
     [self.view addSubview:({
-        UIView *box = [[UIView alloc] initWithFrame:CGRectMake(354, 778, 40, 84)];
+        UIView *box = [[UIView alloc] initWithFrame:CGRectMake(UI(354), self.view.bounds.size.height-100, UI(40), UI(84))];
         box.backgroundColor = [UIColor whiteColor];
 
         [box addSubview:({
-            UIImageView *zoom = [[UIImageView alloc] initWithFrame:CGRectMake(6, 8, 25, 25)];
+            UIImageView *zoom = [[UIImageView alloc] initWithFrame:UIRect(6, 8, 25, 25)];
             zoom.image = [UIImage imageNamed:@"zoom"];
             zoom.userInteractionEnabled = true;
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(zoomMap)];
@@ -219,13 +220,13 @@
         })];
 
         [box addSubview:({
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(6, 43, 25, 1)];
+            UIView *line = [[UIView alloc] initWithFrame:UIRect(6, 43, 25, 2)];
             line.backgroundColor = [UIColor lightGrayColor];
             line;
         })];
 
         [box addSubview:({
-            UIImageView *reduce = [[UIImageView alloc] initWithFrame:CGRectMake(4, 48, 30, 30)];
+            UIImageView *reduce = [[UIImageView alloc] initWithFrame:UIRect(4, 48, 30, 30)];
             reduce.image = [UIImage imageNamed:@"reduce"];
             reduce.userInteractionEnabled = true;
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reduceMap)];
@@ -244,34 +245,34 @@
         [self.view addSubview:self.road_planning_box];
         return;
     }
-    self.road_planning_box = [[UIView alloc] initWithFrame:CGRectMake(10, 95, 300, 96)];
+    self.road_planning_box = [[UIView alloc] initWithFrame:UIRect(10, STATUSBAR_HEIGHT+44+15, 300, 96)];
     self.road_planning_box.backgroundColor = [UIColor whiteColor];
     [self.road_planning_box addSubview:({
-        UIView *red = [[UIView alloc] initWithFrame:CGRectMake(10, 20, 10, 10)];
+        UIView *red = [[UIView alloc] initWithFrame:UIRect(10, 20, 10, 10)];
         red.backgroundColor = [UIColor redColor];
         red;
     })];
     [self.road_planning_box addSubview:({
-        _inputStart = [[UITextField alloc] initWithFrame:CGRectMake(25, 8, 215, 34)];
+        _inputStart = [[UITextField alloc] initWithFrame:UIRect(25, 8, 215, 34)];
         _inputStart.placeholder = @"输入起点";
         _inputStart.borderStyle = UITextBorderStyleRoundedRect;
         _inputStart.delegate = self;
         _inputStart;
     })];
     [self.road_planning_box addSubview:({
-        UIView *blue = [[UIView alloc] initWithFrame:CGRectMake(10, 66, 10, 10)];
+        UIView *blue = [[UIView alloc] initWithFrame:UIRect(10, 66, 10, 10)];
         blue.backgroundColor = [UIColor blueColor];
         blue;
     })];
     [self.road_planning_box addSubview:({
-        _inputEnd = [[UITextField alloc] initWithFrame:CGRectMake(25, 54, 215, 34)];
+        _inputEnd = [[UITextField alloc] initWithFrame:UIRect(25, 54, 215, 34)];
         _inputEnd.borderStyle = UITextBorderStyleRoundedRect;
         _inputEnd.placeholder = @"输入终点";
         _inputEnd.delegate = self;
         _inputEnd;
     })];
     [self.road_planning_box addSubview:({
-        UIImageView *go = [[UIImageView alloc] initWithFrame:CGRectMake(253, 22, 34, 34)];
+        UIImageView *go = [[UIImageView alloc] initWithFrame:UIRect(253, 22, 34, 34)];
         go.image = [UIImage imageNamed:@"go_40"];
         go.userInteractionEnabled = true;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(start_road_planning)];
@@ -279,9 +280,10 @@
         go;
     })];
     [self.road_planning_box addSubview:({
-        UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(253, 56, 34, 22)];
+        UILabel *lable = [[UILabel alloc] initWithFrame:UIRect(253, 56, 34, 22)];
         lable.text = @"Go";
         lable.textAlignment = NSTextAlignmentCenter;
+        lable.font = [UIFont systemFontOfSize:UI(17)];
         lable;
     })];
     [self.view addSubview:self.road_planning_box];

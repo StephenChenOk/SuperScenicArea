@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 #define IS_IPHONE_XMAX     (SCREEN_WIDTH == [ScreenUtil sizeFor65Inch].width && SCREEN_HEIGHT == [ScreenUtil sizeFor65Inch].height && [UIScreen mainScreen].scale == 3)
 
 //屏幕顶部大小
-#define STATUSBARHEIGHT    (IS_IPHONE_X_XR_MAX ? 44 : 20)
+#define STATUSBAR_HEIGHT    (IS_IPHONE_X_XR_MAX ? 44 : 20)
 
 //根据机型适配大小
 #define UI(x)                       UIAdapter(x)
