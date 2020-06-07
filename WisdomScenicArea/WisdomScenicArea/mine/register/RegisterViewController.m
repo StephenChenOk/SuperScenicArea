@@ -10,8 +10,11 @@
 #import "UIColor+TransformColor.h"
 #import "UserUtil.h"
 #import "ScreenUtil.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
-@interface RegisterViewController ()<UITextFieldDelegate>
+@interface RegisterViewController (){
+    IQKeyboardReturnKeyHandler * _returnKeyHander;  //键盘遮挡控制
+}
 
 @property (nonatomic, strong, readwrite) UITextField *account;
 @property (nonatomic, strong, readwrite) UITextField *password;
@@ -47,7 +50,6 @@
             self.account.font = [UIFont systemFontOfSize:UI(15)];
             self.account.placeholder = @"账号";
             self.account.borderStyle = UITextBorderStyleRoundedRect;//边框圆角
-            self.account.delegate = self;
             self.account;
         })];
         [self.view addSubview:({
@@ -61,7 +63,6 @@
             self.password.font = [UIFont systemFontOfSize:UI(15)];
             self.password.placeholder = @"密码";
             self.password.borderStyle = UITextBorderStyleRoundedRect;
-            self.password.delegate = self;
             self.password;
         })];
         [self.view addSubview:({
@@ -75,7 +76,6 @@
             self.confirmPassword.font = [UIFont systemFontOfSize:UI(15)];
             self.confirmPassword.placeholder = @"确认密码";
             self.confirmPassword.borderStyle = UITextBorderStyleRoundedRect;
-            self.confirmPassword.delegate = self;
             self.confirmPassword;
         })];
         [self.view addSubview:({
@@ -106,6 +106,7 @@
     [super viewDidLoad];
     
     _registerUtil = [[UserUtil alloc] init];
+    _returnKeyHander = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
 }
 
 #pragma mark 进行注册
@@ -130,11 +131,5 @@
     }
 }
 
-#pragma mark UITextFieldDelegate
-//收起键盘
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return NO;
-}
 
 @end

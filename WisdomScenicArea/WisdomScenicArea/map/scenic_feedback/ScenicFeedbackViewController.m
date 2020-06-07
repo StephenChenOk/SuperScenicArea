@@ -15,7 +15,7 @@
 #define FEEDBACK_SERVER_URL "http://47.102.153.115:8080/isa/feedback"
 
 //景区反馈
-@interface ScenicFeedbackViewController ()<UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ScenicFeedbackViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong, readwrite) UITextField *tfName;
 @property (nonatomic, strong, readwrite) UITextField *tfLocation;
@@ -56,7 +56,9 @@
     })];
     [self.view addSubview:({
         _tfName = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 20, 296, 34)];
-        _tfName.placeholder = @"输入这个地点的名称";
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"输入这个地点的名称" attributes:
+             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(17)]}];
+        _tfName.attributedPlaceholder = attrString;
         _tfName.borderStyle = UITextBorderStyleNone;
         _tfName;
     })];
@@ -74,7 +76,9 @@
     })];
     [self.view addSubview:({
         _tfLocation = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 78, 296, 34)];
-        _tfLocation.placeholder = @"输入这个地点的详细位置";
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"输入这个地点的详细位置" attributes:
+             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(17)]}];
+        _tfLocation.attributedPlaceholder = attrString;
         _tfLocation;
     })];
     [self.view addSubview:({
@@ -135,7 +139,6 @@
         _tvContent = [[UITextView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 378, 374, 100)];
         _tvContent.text = @"请输入您要反馈的内容";
         _tvContent.textColor = [UIColor grayColor];
-        _tvContent.delegate = self;
         _tvContent.font = [UIFont systemFontOfSize:UI(16)];
 
         //设置内边距
@@ -171,7 +174,9 @@
     })];
     [self.view addSubview:({
         _tfPhoneNum = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 542, 296, 34)];
-        _tfPhoneNum.placeholder = @"请输入您的联系方式";
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"请输入您的联系方式" attributes:
+             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(17)]}];
+        _tfPhoneNum.attributedPlaceholder = attrString;
         _tfPhoneNum;
     })];
 
@@ -187,24 +192,55 @@
     })];
 }
 
-#pragma mark 点击事件
-//获取照片
-- (void)get_picture {
-    NSLog(@"获取照片");
-    //1 相册中获取
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        //实例化
-        UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
-        //设置资源来源(相册、相机、图库之一)
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        //设置代理
-        imagePickerVC.delegate = self;
-        //是否允许编辑
-        imagePickerVC.allowsEditing = YES;
-        [self presentViewController:imagePickerVC animated:YES completion:nil];
-    } else {
-        NSLog(@"相册资源不可用");
-    }
+#pragma mark --显示弹窗选择
+- (void)showSheet {
+    //显示弹出框列表选择
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //按钮相应事件
+    UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDestructive
+                                                            handler:^(UIAlertAction *action) {
+        NSLog(@"拍照");
+        //2 相机中获取(模拟器无摄像头可用？)
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            //实例化
+            UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+            //设置资源来源(相册、相机、图库之一)
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+            //设置代理
+            imagePickerVC.delegate = self;
+            //相机获取媒体的类型（相机、录制视频）
+            imagePickerVC.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        } else {
+            NSLog(@"无摄像头可用");
+        }
+    }];
+    UIAlertAction *albumAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *action) {
+        //1 相册中获取
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            //实例化
+            UIImagePickerController *imagePickerVC = [[UIImagePickerController alloc] init];
+            //设置资源来源(相册、相机、图库之一)
+            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            //设置代理
+            imagePickerVC.delegate = self;
+            //是否允许编辑
+            imagePickerVC.allowsEditing = YES;
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
+        } else {
+            NSLog(@"相册资源不可用");
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+        //响应事件
+        NSLog(@"取消");
+    }];
+    [alert addAction:takePhotoAction];
+    [alert addAction:albumAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 //提交反馈
@@ -312,17 +348,6 @@
         textView.text = @"";
         textView.textColor = [UIColor blackColor];
     }
-}
-
-//收起键盘
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];   //取消第一响应者，也就是隐藏键盘
-
-        return NO;   //不对 "\n"作出输入反应
-    }
-
-    return YES;
 }
 
 @end

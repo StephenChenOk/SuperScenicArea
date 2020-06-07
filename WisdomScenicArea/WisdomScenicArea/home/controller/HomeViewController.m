@@ -68,7 +68,7 @@
             wcLabel;
         })];
         [self.view addSubview:({
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(UI(0), UI(STATUSBAR_HEIGHT+44+357), UI(414), UI(2))];
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(UI(0), UI(STATUSBAR_HEIGHT+44+357), UI(414), UI(1))];
             line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
             line;
         })];

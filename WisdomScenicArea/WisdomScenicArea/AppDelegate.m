@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @interface AppDelegate ()
 
@@ -49,6 +50,14 @@
     
     //初始化高德地图api
     [AMapServices sharedServices].apiKey = @"92c3b6c6ee318db2091c24998c5379e9";
+    
+    //避免键盘遮挡
+    [[IQKeyboardManager sharedManager] setEnable:YES];
+    [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;  //点击背景，键盘收回
+    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"IQKeyboardImage"];
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;    
+
     
     return YES;
 }
