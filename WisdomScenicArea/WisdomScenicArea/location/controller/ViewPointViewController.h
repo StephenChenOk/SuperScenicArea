@@ -11,9 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ViewPointViewController : UIViewController
+
 - (void)setNavigationTitle:(NSString *)title;
-- (void)initChongqingData;
-- (void)initShanghaiData;
+- (void)initViewPointDataWithCity:(NSString *)city;
+
 @end
 
 NS_ASSUME_NONNULL_END

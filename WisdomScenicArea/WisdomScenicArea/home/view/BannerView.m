@@ -65,7 +65,7 @@
     _titleLabel.text = _titleData[(_currentPage+1) % _titleData.count];
         isFirst = false;
     }else{
-    _titleLabel.text = _titleData[_currentPage % _titleData.count];
+        _titleLabel.text = _titleData[_currentPage % _titleData.count];
     }
     //2获得当前的点
     CGPoint point = _scrollView.contentOffset;

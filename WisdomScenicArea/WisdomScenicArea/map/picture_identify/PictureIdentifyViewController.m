@@ -187,7 +187,7 @@
 - (void)uploadImage {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
+    
     NSData *data = _pictureData;
 
     [manager POST:@SCENIC_IDENTIFY_SERVER_URL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

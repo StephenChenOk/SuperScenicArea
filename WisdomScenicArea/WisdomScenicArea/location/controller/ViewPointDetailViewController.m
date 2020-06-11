@@ -10,13 +10,11 @@
 #import "ViewPointItem.h"
 #import "UIColor+TransformColor.h"
 #import "QFLabelView.h"
-#import <AFNetworking/AFNetworking.h>
 #import "ScreenUtil.h"
 
-#define BIG_DATA_SERVER_URL_CQ "http://47.102.153.115:8877/pre"
-#define BIG_DATA_SERVER_URL_SH "http://47.102.153.115:8877/spre"
-
-@interface ViewPointDetailViewController ()
+@interface ViewPointDetailViewController (){
+    NSString *_humidity;
+}
 
 @property (nonatomic, strong, readwrite) UIImageView *ivImage;
 @property (nonatomic, strong, readwrite) QFLabelView *lbInfo;
@@ -24,6 +22,19 @@
 
 @property (nonatomic, strong, readwrite) UILabel *lbToday;
 @property (nonatomic, strong, readwrite) UILabel *lbTomorrow;
+
+//天气
+@property (nonatomic, strong, readwrite) UIImageView *weatherLogo;
+@property (nonatomic, strong, readwrite) UILabel *weatherLabel;
+//温度
+@property (nonatomic, strong, readwrite) UIImageView *temperatureLogo;
+@property (nonatomic, strong, readwrite) UILabel *temperatureLabel;
+//湿度
+@property (nonatomic, strong, readwrite) UIImageView *humidityLogo;
+@property (nonatomic, strong, readwrite) UILabel *humidityLabel;
+//风向
+@property (nonatomic, strong, readwrite) UIImageView *directLogo;
+@property (nonatomic, strong, readwrite) UILabel *directLabel;
 
 @end
 
@@ -41,8 +52,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
 
-    [self getDataFromServer];
+- (void)viewWillAppear:(BOOL)animated{
+     [self loadTodayWeather];
 }
 
 //初始化景点详情信息
@@ -53,8 +66,8 @@
 
     //根据label中内容的大小自适应label大小
     self.lbInfo.text = item.detailInfo;
-    CGSize labelSize = [item.detailInfo boundingRectWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width * 3) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  | NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:UI(17)] } context:nil].size;
-    self.lbInfo.frame = CGRectMake(UI(3), UI(551), ceil(labelSize.width-3), ceil(labelSize.height + 100) );
+    CGSize labelSize = [item.detailInfo boundingRectWithSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width * 3) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  | NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName: [UIFont systemFontOfSize:UI(16)] } context:nil].size;
+    self.lbInfo.frame = CGRectMake(UI(3), UI(534), ceil(labelSize.width-3), ceil(labelSize.height + 100) );
 
     
     //设置scrollView内容的大小
@@ -107,56 +120,55 @@
             line;
         })];
         [_scrollView addSubview:({
-            UIImageView *image = [[UIImageView alloc] initWithFrame:UIRect(83, 324, 45, 45)];
-            image.image = [UIImage imageNamed:@"yin"];
-            image;
+            _weatherLogo = [[UIImageView alloc] initWithFrame:UIRect(85, 323, 40, 40)];
+            _weatherLogo;
         })];
         [_scrollView addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(88, 375, 35, 21)];
-            label.font = [UIFont systemFontOfSize:UI(17)];
-            label.text = @"多云";
-            label;
+            _weatherLabel = [[UILabel alloc] initWithFrame:UIRect(55, 367, 100, 21)];
+            _weatherLabel.font = [UIFont systemFontOfSize:UI(16)];
+            _weatherLabel.textAlignment = NSTextAlignmentCenter;
+            _weatherLabel;
         })];
         [_scrollView addSubview:({
-            UIImageView *image = [[UIImageView alloc] initWithFrame:UIRect(291, 324, 45, 45)];
-            image.image = [UIImage imageNamed:@"temperature"];
-            image;
+            _temperatureLogo = [[UIImageView alloc] initWithFrame:UIRect(294, 323, 38, 38)];
+            _temperatureLogo.image = [UIImage imageNamed:@"temperature"];
+            _temperatureLogo;
         })];
         [_scrollView addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(288, 375, 51, 21)];
-            label.text = @"22.1℃";
-            label.font = [UIFont systemFontOfSize:UI(17)];
-            label;
+            _temperatureLabel = [[UILabel alloc] initWithFrame:UIRect(263, 367, 100, 21)];
+            _temperatureLabel.font = [UIFont systemFontOfSize:UI(16)];
+            _temperatureLabel.textAlignment = NSTextAlignmentCenter;
+            _temperatureLabel;
         })];
         [_scrollView addSubview:({
-            UIImageView *image = [[UIImageView alloc] initWithFrame:UIRect(83, 415, 45, 45)];
-            image.image = [UIImage imageNamed:@"humidity"];
-            image;
+            _humidityLogo = [[UIImageView alloc] initWithFrame:UIRect(85, 409, 39, 39)];
+            _humidityLogo.image = [UIImage imageNamed:@"humidity"];
+            _humidityLogo;
         })];
         [_scrollView addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(79, 465, 52, 21)];
-            label.text = @"72.3 %";
-            label.font = [UIFont systemFontOfSize:UI(17)];
-            label;
+            _humidityLabel = [[UILabel alloc] initWithFrame:UIRect(55, 452, 100, 21)];
+            _humidityLabel.font = [UIFont systemFontOfSize:UI(16)];
+            _humidityLabel.textAlignment = NSTextAlignmentCenter;
+            _humidityLabel;
         })];
         [_scrollView addSubview:({
-            UIImageView *image = [[UIImageView alloc] initWithFrame:UIRect(291, 415, 40, 40)];
-            image.image = [UIImage imageNamed:@"visibility"];
-            image;
+            _directLogo = [[UIImageView alloc] initWithFrame:UIRect(294, 409, 39, 39)];
+            _directLogo.image = [UIImage imageNamed:@"direct"];
+            _directLogo;
         })];
         [_scrollView addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(266, 465, 95, 21)];
-            label.text = @"12860.155m";
-            label.font = [UIFont systemFontOfSize:UI(17)];
-            label;
+            _directLabel = [[UILabel alloc] initWithFrame:UIRect(233, 452, 160, 21)];
+            _directLabel.font = [UIFont systemFontOfSize:UI(16)];
+            _directLabel.textAlignment = NSTextAlignmentCenter;
+            _directLabel;
         })];
         [_scrollView addSubview:({
-            UIView *line = [[UIView alloc] initWithFrame:UIRect(0, 503, 414, 10)];
+            UIView *line = [[UIView alloc] initWithFrame:UIRect(0, 484, 414, 10)];
             line.backgroundColor = [UIColor colorWithRGB:0xF8F7F7 lpha:1];
             line;
         })];
         [_scrollView addSubview:({
-            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(157, 521, 100, 21)];
+            UILabel *label = [[UILabel alloc] initWithFrame:UIRect(157, 504, 100, 21)];
             label.text = @"景点简介";
             label.textAlignment = NSTextAlignmentCenter;
             label.font = [UIFont systemFontOfSize:UI(17)];
@@ -174,47 +186,55 @@
     })];
 }
 
-#pragma mark --获取大数据
-- (void)getDataFromServer {
-//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-//
-//    NSURL *url = [NSURL URLWithString:@BIG_DATA_SERVER_URL_CQ];
-//    NSURLRequest *requset = [NSURLRequest requestWithURL:url];
-//
-//    NSURLSessionTask *dataTask = [manager dataTaskWithRequest:requset completionHandler:^(NSURLResponse *response,id responseObject,NSError *error){
-//        if(error){
-//            NSLog(@"获取天气数据失败,error:%@",error);
-//        }else{
-//            NSString *data = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//            NSLog(@"%@",data);
-//        }
-//    }];
-//
-//    [dataTask resume];
+#pragma mark -- 添加天气信息
+- (void)loadTodayWeather{
+    NSLog(@"loadTodayWeather");
+    NSString *weather = [_todayWeather objectForKey:@"info"];
+    _weatherLabel.text = weather;
+    [self setWeatherLogoWithName:weather];
+    
+    _temperatureLabel.text = [_todayWeather objectForKey:@"temperature"];
+    _humidity = [_todayWeather objectForKey:@"humidity"];
+    _humidityLabel.text = _humidity;
+    _directLabel.text = [_todayWeather objectForKey:@"direct"];
+}
+- (void)loadTomorrowWeather{
+    NSString *weather = [_tomorrowWeather objectForKey:@"weather"];
+    _weatherLabel.text = weather;
+    [self setWeatherLogoWithName:weather];
+    
+    _temperatureLabel.text = [_tomorrowWeather objectForKey:@"temperature"];
+    _humidityLabel.text = [NSString stringWithFormat:@"%d",[_humidity intValue]+3];
+    _directLabel.text = [_tomorrowWeather objectForKey:@"direct"];
+}
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-    [manager GET:@BIG_DATA_SERVER_URL_CQ parameters:nil success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nullable responseObject) {
-        NSString *response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"获取天气数据成功----> %@", response);
-    } failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-        if (error) {
-            NSLog(@"获取天气数据失败");
-        }
-    }];
+- (void)setWeatherLogoWithName:(NSString *)name{
+    if([name isEqualToString:@"晴"]){
+        _weatherLogo.image = [UIImage imageNamed:@"sun"];
+    }else if([name isEqualToString:@"多云"]){
+        _weatherLogo.image = [UIImage imageNamed:@"yin"];
+    }else if([name isEqualToString:@"阴"]){
+        _weatherLogo.image = [UIImage imageNamed:@"yin"];
+    }else if([name containsString:@"雪"]){
+        _weatherLogo.image = [UIImage imageNamed:@"snow"];
+    }else if([name containsString:@"雨"]){
+        _weatherLogo.image = [UIImage imageNamed:@"rain"];
+    }else{
+        _weatherLogo.image = [UIImage imageNamed:@"yin"];
+    }
 }
 
 #pragma mark --点击事件
 - (void)today_weather{
     _lbTomorrow.textColor = [UIColor blackColor];
     _lbToday.textColor = [UIColor colorWithRGB:0x5abce3 lpha:1];
+    [self loadTodayWeather];
 }
 
 - (void)tomorrow_weather{
     _lbToday.textColor = [UIColor blackColor];
     _lbTomorrow.textColor = [UIColor colorWithRGB:0x5abce3 lpha:1];
+    [self loadTomorrowWeather];
 }
 
 @end

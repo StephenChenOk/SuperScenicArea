@@ -9,4 +9,5 @@ target 'WisdomScenicArea' do
 	pod 'SocketRocket'
 	pod 'MBProgressHUD','~> 1.2.0'
 	pod 'IQKeyboardManager'
+	pod 'JSONModel'
 end

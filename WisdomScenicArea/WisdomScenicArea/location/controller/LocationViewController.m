@@ -54,7 +54,7 @@
             chongqi_img;
         })];
         [scorllView addSubview:({
-            UILabel *chongqi_lable = [[UILabel alloc] initWithFrame:UIRect(165, 210, 85, 37)];
+            UILabel *chongqi_lable = [[UILabel alloc] initWithFrame:UIRect(165, 200, 85, 37)];
             chongqi_lable.text = @"重庆";
             chongqi_lable.font = [UIFont systemFontOfSize:UI(18)];
             chongqi_lable.textAlignment = NSTextAlignmentCenter;
@@ -75,7 +75,7 @@
             shanghai_img;
         })];
         [scorllView addSubview:({
-            UILabel *shanghai_lable = [[UILabel alloc] initWithFrame:UIRect(165, 447, 85, 37)];
+            UILabel *shanghai_lable = [[UILabel alloc] initWithFrame:UIRect(165, 437, 85, 37)];
             shanghai_lable.text = @"上海";
             shanghai_lable.font = [UIFont systemFontOfSize:UI(18)];
             shanghai_lable.textAlignment = NSTextAlignmentCenter;
@@ -96,7 +96,7 @@
             beijing_img;
         })];
         [scorllView addSubview:({
-            UILabel *beijing_lable = [[UILabel alloc] initWithFrame:UIRect(165, 687, 85, 37)];
+            UILabel *beijing_lable = [[UILabel alloc] initWithFrame:UIRect(165, 679, 85, 37)];
             beijing_lable.text = @"北京";
             beijing_lable.textAlignment = NSTextAlignmentCenter;
             beijing_lable.font = [UIFont systemFontOfSize:UI(18)];
@@ -119,14 +119,14 @@
 - (void)gotoShanghai {
     ViewPointViewController *controller = [[ViewPointViewController alloc] init];
     [controller setNavigationTitle:@"上海"];
-    [controller initShanghaiData];
+    [controller initViewPointDataWithCity:@"上海"];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)gotoChongqi {
     ViewPointViewController *controller = [[ViewPointViewController alloc] init];
     [controller setNavigationTitle:@"重庆"];
-    [controller initChongqingData];
+    [controller initViewPointDataWithCity:@"重庆"];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

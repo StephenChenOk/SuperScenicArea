@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ViewPointDetailViewController : UIViewController
 
+@property (nonatomic, strong, readwrite) NSDictionary *todayWeather;
+@property (nonatomic, strong, readwrite) NSDictionary *tomorrowWeather;
+
 - (void)initDetailData:(ViewPointItem *)item;
 
 @end

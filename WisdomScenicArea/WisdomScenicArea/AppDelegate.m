@@ -56,7 +56,7 @@
     [[IQKeyboardManager sharedManager] setEnableAutoToolbar:YES];
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;  //点击背景，键盘收回
     [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"IQKeyboardImage"];
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;    
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
 
     
     return YES;
