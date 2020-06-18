@@ -11,6 +11,11 @@
 		740F0F22247FFBAF00D340C2 /* PictureIdentifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F0F21247FFBAF00D340C2 /* PictureIdentifyViewController.m */; };
 		740F0F25247FFC0400D340C2 /* SceneryPushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F0F24247FFC0400D340C2 /* SceneryPushViewController.m */; };
 		740F0F28247FFC3B00D340C2 /* ScenicFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 740F0F27247FFC3B00D340C2 /* ScenicFeedbackViewController.m */; };
+		74107BDE2499F95800C3D817 /* QFTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74107BDD2499F95800C3D817 /* QFTabBarViewController.m */; };
+		74107BE2249A0C6000C3D817 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74107BE1249A0C6000C3D817 /* SearchViewController.m */; };
+		74107BE5249A119900C3D817 /* QFTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 74107BE4249A119900C3D817 /* QFTextField.m */; };
+		74107BE8249A1D0700C3D817 /* POITableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74107BE7249A1D0700C3D817 /* POITableViewCell.m */; };
+		74107BEB249A482C00C3D817 /* PoiItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 74107BEA249A482C00C3D817 /* PoiItem.m */; };
 		742575D72489EB480065134D /* ScreenUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 742575D62489EB480065134D /* ScreenUtil.m */; };
 		743D97D624813854009C46A4 /* RoadPlanningUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 743D97D524813854009C46A4 /* RoadPlanningUtil.m */; };
 		743D97D924828AE7009C46A4 /* AStarUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 743D97D824828AE7009C46A4 /* AStarUtils.m */; };
@@ -53,6 +58,16 @@
 		740F0F24247FFC0400D340C2 /* SceneryPushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneryPushViewController.m; sourceTree = "<group>"; };
 		740F0F26247FFC3B00D340C2 /* ScenicFeedbackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScenicFeedbackViewController.h; sourceTree = "<group>"; };
 		740F0F27247FFC3B00D340C2 /* ScenicFeedbackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScenicFeedbackViewController.m; sourceTree = "<group>"; };
+		74107BDC2499F95800C3D817 /* QFTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFTabBarViewController.h; sourceTree = "<group>"; };
+		74107BDD2499F95800C3D817 /* QFTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFTabBarViewController.m; sourceTree = "<group>"; };
+		74107BE0249A0C6000C3D817 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		74107BE1249A0C6000C3D817 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		74107BE3249A119900C3D817 /* QFTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QFTextField.h; sourceTree = "<group>"; };
+		74107BE4249A119900C3D817 /* QFTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QFTextField.m; sourceTree = "<group>"; };
+		74107BE6249A1D0700C3D817 /* POITableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POITableViewCell.h; sourceTree = "<group>"; };
+		74107BE7249A1D0700C3D817 /* POITableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POITableViewCell.m; sourceTree = "<group>"; };
+		74107BE9249A482C00C3D817 /* PoiItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoiItem.h; sourceTree = "<group>"; };
+		74107BEA249A482C00C3D817 /* PoiItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiItem.m; sourceTree = "<group>"; };
 		742575D52489EB480065134D /* ScreenUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreenUtil.h; sourceTree = "<group>"; };
 		742575D62489EB480065134D /* ScreenUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreenUtil.m; sourceTree = "<group>"; };
 		743D97D424813853009C46A4 /* RoadPlanningUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoadPlanningUtil.h; sourceTree = "<group>"; };
@@ -166,6 +181,43 @@
 			path = picture_identify;
 			sourceTree = "<group>";
 		};
+		74107BDF249A0C3C00C3D817 /* search */ = {
+			isa = PBXGroup;
+			children = (
+				74107BEE249B357E00C3D817 /* model */,
+				74107BED249B357900C3D817 /* controller */,
+				74107BEC249B357400C3D817 /* view */,
+			);
+			path = search;
+			sourceTree = "<group>";
+		};
+		74107BEC249B357400C3D817 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				74107BE6249A1D0700C3D817 /* POITableViewCell.h */,
+				74107BE7249A1D0700C3D817 /* POITableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		74107BED249B357900C3D817 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				74107BE0249A0C6000C3D817 /* SearchViewController.h */,
+				74107BE1249A0C6000C3D817 /* SearchViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		74107BEE249B357E00C3D817 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				74107BE9249A482C00C3D817 /* PoiItem.h */,
+				74107BEA249A482C00C3D817 /* PoiItem.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
 		745CE11D247E31DC002F576F /* info */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +238,10 @@
 				745CE126247E7386002F576F /* QFTouchView.m */,
 				743D97E02483F50B009C46A4 /* QFLabelView.h */,
 				743D97E12483F50B009C46A4 /* QFLabelView.m */,
+				74107BDC2499F95800C3D817 /* QFTabBarViewController.h */,
+				74107BDD2499F95800C3D817 /* QFTabBarViewController.m */,
+				74107BE3249A119900C3D817 /* QFTextField.h */,
+				74107BE4249A119900C3D817 /* QFTextField.m */,
 			);
 			path = myviews;
 			sourceTree = "<group>";
@@ -211,6 +267,7 @@
 		746B0DCC247CF6C200FF0599 /* WisdomScenicArea */ = {
 			isa = PBXGroup;
 			children = (
+				74107BDF249A0C3C00C3D817 /* search */,
 				745CE124247E7343002F576F /* myviews */,
 				746B0E3E247D00AC00FF0599 /* utils */,
 				746B0E32247D007300FF0599 /* mine */,
@@ -525,6 +582,8 @@
 				7499A81B2486978300EF6426 /* MineViewController.m in Sources */,
 				745CE12A247E77C5002F576F /* ModifyNameViewController.m in Sources */,
 				740F0F22247FFBAF00D340C2 /* PictureIdentifyViewController.m in Sources */,
+				74107BE8249A1D0700C3D817 /* POITableViewCell.m in Sources */,
+				74107BDE2499F95800C3D817 /* QFTabBarViewController.m in Sources */,
 				7499A8152486976600EF6426 /* LoginViewController.m in Sources */,
 				746B0DD5247CF6C200FF0599 /* ViewController.m in Sources */,
 				746B0DCF247CF6C200FF0599 /* AppDelegate.m in Sources */,
@@ -533,6 +592,7 @@
 				743D97D624813854009C46A4 /* RoadPlanningUtil.m in Sources */,
 				742575D72489EB480065134D /* ScreenUtil.m in Sources */,
 				743D97DC248398F8009C46A4 /* ScenicDescribeUtil.m in Sources */,
+				74107BEB249A482C00C3D817 /* PoiItem.m in Sources */,
 				7499A81E2486979300EF6426 /* MapViewController.m in Sources */,
 				7499A826248697D000EF6426 /* HomeItemTableViewCell.m in Sources */,
 				746B0DD2247CF6C200FF0599 /* SceneDelegate.m in Sources */,
@@ -540,6 +600,8 @@
 				743D97D924828AE7009C46A4 /* AStarUtils.m in Sources */,
 				743D97DF2483E5C8009C46A4 /* ViewPointItemInitUtil.m in Sources */,
 				743D97E22483F50B009C46A4 /* QFLabelView.m in Sources */,
+				74107BE2249A0C6000C3D817 /* SearchViewController.m in Sources */,
+				74107BE5249A119900C3D817 /* QFTextField.m in Sources */,
 				7499A827248697D000EF6426 /* BannerView.m in Sources */,
 				745CE120247E3269002F576F /* PersonalInfoViewController.m in Sources */,
 				7499A8362486986F00EF6426 /* ViewPointTableViewCell.m in Sources */,
@@ -682,6 +744,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PU8N5HR5MW;
 				INFOPLIST_FILE = WisdomScenicArea/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -700,6 +763,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PU8N5HR5MW;
 				INFOPLIST_FILE = WisdomScenicArea/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

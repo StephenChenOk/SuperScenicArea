@@ -33,6 +33,8 @@
         self.tabBarItem.title = @"主页";
         self.tabBarItem.image = [UIImage imageNamed:@"home"];
         self.tabBarItem.selectedImage = [UIImage imageNamed:@"home_selected"];
+        self.title = @"主页";
+        self.navigationController.navigationBar.barTintColor = [UIColor greenColor];
 
         [self.view addSubview:({
             UIImageView *weatherImg = [[UIImageView alloc] initWithFrame:CGRectMake(UI(44), UI(STATUSBAR_HEIGHT+44+268), UI(50), UI(50))];
@@ -78,7 +80,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self initBannerImages];
     [self initBannerView];
     [self initHomeItemDatas];

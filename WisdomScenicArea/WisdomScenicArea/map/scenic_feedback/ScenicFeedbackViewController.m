@@ -52,12 +52,13 @@
         UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 25, 70, 21)];
         label.text = @"地点名称";
         label.font = [UIFont systemFontOfSize:UI(17)];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
         _tfName = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 20, 296, 34)];
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"输入这个地点的名称" attributes:
-             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(17)]}];
+             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(16)]}];
         _tfName.attributedPlaceholder = attrString;
         _tfName.borderStyle = UITextBorderStyleNone;
         _tfName;
@@ -72,12 +73,13 @@
         UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 83, 70, 21)];
         label.text = @"所在位置";
         label.font = [UIFont systemFontOfSize:UI(17)];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
         _tfLocation = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 78, 296, 34)];
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"输入这个地点的详细位置" attributes:
-             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(17)]}];
+             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(16)]}];
         _tfLocation.attributedPlaceholder = attrString;
         _tfLocation;
     })];
@@ -91,6 +93,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 140, 70, 21)];
         label.text = @"添加图片";
         label.font = [UIFont systemFontOfSize:UI(17)];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
@@ -112,9 +115,9 @@
     [self.view addSubview:({
         UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 249, 374, 50)];
         label.text = @"请对准要反馈的地点进行拍照，上传真实的照片能提高反馈的成功率";
-        label.font = [UIFont systemFontOfSize:UI(17)];
+        label.font = [UIFont systemFontOfSize:UI(15)];
         label.numberOfLines = 2;
-        label.font = [UIFont systemFontOfSize:15];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
@@ -127,6 +130,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 327, 70, 21)];
         label.text = @"问题描述";
         label.font = [UIFont systemFontOfSize:UI(17)];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
@@ -137,8 +141,6 @@
 
     [self.view addSubview:({
         _tvContent = [[UITextView alloc] initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 378, 374, 100)];
-        _tvContent.text = @"请输入您要反馈的内容";
-        _tvContent.textColor = [UIColor grayColor];
         _tvContent.font = [UIFont systemFontOfSize:UI(16)];
 
         //设置内边距
@@ -158,6 +160,7 @@
         UILabel *label = [[UILabel alloc] initWithFrame:UIRect(285, STATUSBAR_HEIGHT + 44 + 484, 135, 17)];
         label.text = @"输入5-300个字符";
         label.font = [UIFont systemFontOfSize:UI(13)];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
@@ -170,12 +173,13 @@
         UILabel *label = [[UILabel alloc]initWithFrame:UIRect(20, STATUSBAR_HEIGHT + 44 + 547, 70, 21)];
         label.text = @"联系方式";
         label.font = [UIFont systemFontOfSize:UI(17)];
+        label.textColor = [UIColor darkGrayColor];
         label;
     })];
     [self.view addSubview:({
         _tfPhoneNum = [[UITextField alloc] initWithFrame:UIRect(98, STATUSBAR_HEIGHT + 44 + 542, 296, 34)];
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"请输入您的联系方式" attributes:
-             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(17)]}];
+             @{NSFontAttributeName:[UIFont boldSystemFontOfSize:UI(16)]}];
         _tfPhoneNum.attributedPlaceholder = attrString;
         _tfPhoneNum;
     })];

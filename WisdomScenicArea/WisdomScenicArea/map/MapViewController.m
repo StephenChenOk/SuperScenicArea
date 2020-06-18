@@ -69,6 +69,9 @@
 #pragma mark --生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.navigationController.navigationBar.backgroundColor = [UIColor greenColor];
+    //self.navigationController.navigationBar.hidden = YES;
+    //[self.navigationController.navigationBar setBarTintColor:[UIColor greenColor]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -131,8 +131,9 @@
     [super viewDidLoad];
 
     _loginUtil = [[UserUtil alloc] init];
-    NSLog(@"--x=%f  --y=%f", _scrollView.contentOffset.x, _scrollView.contentOffset.y);
+    
 }
+
 
 //进行登入
 - (void)login {

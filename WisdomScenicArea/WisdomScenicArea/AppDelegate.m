@@ -22,19 +22,21 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // 创建底部导航栏
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    //tabBarController.navigationItem.title = @"测试";
-    //tabBarController.navigationItem.
+    QFTabBarViewController *tabBarController = [[QFTabBarViewController alloc] init];
+//    tabBarController.navigationItem.title = @"测试";
 
     //创建三个子视图
     //1.主页
     HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    homeViewController.tabBarItem.tag = 1;
 
     //2.目的地
     LocationViewController *locationViewController = [[LocationViewController alloc] init];
+    locationViewController.tabBarItem.tag = 2;
 
     //3.我的
     MineViewController *mineViewController = [[MineViewController alloc] init];
+    mineViewController.tabBarItem.tag = 3;
 
     [tabBarController setViewControllers:@[homeViewController, locationViewController, mineViewController]];
 
@@ -58,6 +60,11 @@
     [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"IQKeyboardImage"];
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
 
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+
+    keyWindow.tintAdjustmentMode = UIViewTintAdjustmentModeAutomatic;
+
+    [keyWindow tintColorDidChange];
     
     return YES;
 }

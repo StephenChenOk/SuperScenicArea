@@ -28,7 +28,6 @@
         
         self.view.backgroundColor = [UIColor whiteColor];
         self.tabBarItem.title = @"我的";
-
         self.tabBarItem.image = [UIImage imageNamed:@"mine"];
         self.tabBarItem.selectedImage = [UIImage imageNamed:@"mine_selected"];
     }
@@ -37,6 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.view.backgroundColor = [UIColor greenColor];
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
 }
 
 #pragma mark UIViewController生命周期

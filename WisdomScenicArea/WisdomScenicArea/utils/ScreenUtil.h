@@ -12,7 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //判断是横屏还是竖屏
-#define IS_LANDSCAPE       (UIInterfaceOrientationIsLandscape([[[[[UIApplication sharedApplication] windows] firstObject] windowScene] interfaceOrientation]))
+//#define IS_LANDSCAPE       (UIInterfaceOrientationIsLandscape([[[[[UIApplication sharedApplication] windows] firstObject] windowScene] interfaceOrientation]))
+#define IS_LANDSCAPE (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
 
 //屏幕宽度/高度
 #define SCREEN_WIDTH       (IS_LANDSCAPE ? [[UIScreen mainScreen ] bounds].size.height : [[UIScreen mainScreen ] bounds].size.width)

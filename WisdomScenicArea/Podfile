@@ -10,4 +10,5 @@ target 'WisdomScenicArea' do
 	pod 'MBProgressHUD','~> 1.2.0'
 	pod 'IQKeyboardManager'
 	pod 'JSONModel'
+	pod "LGBluetooth", "~> 1.1.5"
 end

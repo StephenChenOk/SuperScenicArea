@@ -9,6 +9,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ScenicDescribeUtil.h"
 #import "ScreenUtil.h"
+#import <LGBluetooth.h>
 
 //景物推送
 @interface SceneryPushViewController ()<CBCentralManagerDelegate>
@@ -36,10 +37,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    /** 只要一触发这句代码系统会自动检测手机蓝牙状态，你必须实现其代理方法，当然得添加<CBCentralManagerDelegate>*/
-//    self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-//    /** 两个参数为nil, 默认扫描所有的外设，可以设置一些服务，进行过滤搜索*/
+    /** 只要一触发这句代码系统会自动检测手机蓝牙状态，你必须实现其代理方法，当然得添加<CBCentralManagerDelegate>*/
+    self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    /** 两个参数为nil, 默认扫描所有的外设，可以设置一些服务，进行过滤搜索*/
 //    [self.bluetoothManager scanForPeripheralsWithServices:nil options:nil];
+
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], CBCentralManagerScanOptionAllowDuplicatesKey, nil];
+
+    [self.bluetoothManager scanForPeripheralsWithServices:nil options:options];
+    
+    [[LGCentralManager sharedInstance] scanForPeripheralsByInterval:5
+                                                        completion:^(NSArray *peripherals) {
+        if(peripherals.count > 0){
+            LGPeripheral *peripheral = [peripherals objectAtIndex:0];
+            NSLog(@"搜索到蓝牙=%@,RSSI=%d",peripheral.name,peripheral.RSSI);
+        }else{
+            NSLog(@"未搜索到蓝牙设备");
+        }
+    }];
 }
 
 #pragma mark 初始化view
@@ -94,6 +109,7 @@
 /* 这里默认扫到MI，主动连接，当然也可以手动触发连接*/
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    
     NSLog(@"扫描连接外设：%@ %@", peripheral.name, RSSI);
 }
 
@@ -125,5 +141,6 @@
         }
     }
 }
+
 
 @end

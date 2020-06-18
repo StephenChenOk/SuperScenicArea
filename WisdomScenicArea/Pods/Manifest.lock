@@ -27,6 +27,7 @@ PODS:
     - AMapFoundation (~> 1.6.3)
   - IQKeyboardManager (6.5.5)
   - JSONModel (1.8.0)
+  - LGBluetooth (1.1.5)
   - MBProgressHUD (1.2.0)
   - SDWebImage (5.8.0):
     - SDWebImage/Core (= 5.8.0)
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - AMapSearch
   - IQKeyboardManager
   - JSONModel
+  - LGBluetooth (~> 1.1.5)
   - MBProgressHUD (~> 1.2.0)
   - SDWebImage (~> 5.0)
   - SocketRocket
@@ -51,6 +53,7 @@ SPEC REPOS:
     - AMapSearch
     - IQKeyboardManager
     - JSONModel
+    - LGBluetooth
     - MBProgressHUD
     - SDWebImage
     - SocketRocket
@@ -62,10 +65,11 @@ SPEC CHECKSUMS:
   AMapSearch: a048bcca3bf0b8083345070e1f193f814bd8dc01
   IQKeyboardManager: 3a8b9e603f8b0eeaf5f096a1f2b2cfcf121992ef
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
+  LGBluetooth: 8407d2de27bcbd4a9e11243290b928293ffa8881
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   SDWebImage: 84000f962cbfa70c07f19d2234cbfcf5d779b5dc
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 9281c18cc97b7ca1104b922c4539a12f021da112
+PODFILE CHECKSUM: 91b5fafd3caa50ff1be342578f701c350ac0841e
 
 COCOAPODS: 1.9.2

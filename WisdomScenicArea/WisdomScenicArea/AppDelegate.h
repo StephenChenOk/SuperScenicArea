@@ -12,6 +12,7 @@
 #import "MineViewController.h"
 #import "UIColor+TransformColor.h"
 #import <CoreData/CoreData.h>
+#import "QFTabBarViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
