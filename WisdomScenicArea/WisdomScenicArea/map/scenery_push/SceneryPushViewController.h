@@ -11,6 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SceneryPushViewController : UIViewController
 
+- (instancetype)initWithSceneryName:(NSString *)name;
+
+- (instancetype)initWithSceneryName:(NSString *)name;
+
 @end
 
 NS_ASSUME_NONNULL_END

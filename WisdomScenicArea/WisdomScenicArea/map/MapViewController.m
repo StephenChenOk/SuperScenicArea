@@ -16,11 +16,14 @@
 #import "AStarUtils.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "ScreenUtil.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 //websocket服务器url
 #define RATE_FLOW_URL "ws://47.102.153.115:8080/isa/websocket"
 
-@interface MapViewController ()<UITextFieldDelegate, MAMapViewDelegate, SRWebSocketDelegate>
+@interface MapViewController ()<UITextFieldDelegate, MAMapViewDelegate, SRWebSocketDelegate, CBCentralManagerDelegate>{
+    BOOL _isSearchBle;  //判断是否已经搜索到了蓝牙
+}
 
 @property (nonatomic, strong, readwrite) MAMapView *mapView;
 
@@ -49,6 +52,10 @@
 @property (nonatomic, readwrite) MACircle *circle1;  //普贤塔
 @property (nonatomic, readwrite) MACircle *circle2;  //象眼岩
 @property (nonatomic, readwrite) MACircle *circle3;  //桂林抗战遗址
+
+//蓝牙模块
+@property (nonatomic, strong) CBCentralManager *bluetoothManager;
+@property (nonatomic, strong) CBCharacteristic *characteristic;
 
 //标志是否是第一次进入地图，收到服务器消息
 @property (nonatomic, readwrite) BOOL isFirst;
@@ -587,8 +594,8 @@
 //景物推送
 - (void)scenery_push {
     NSLog(@"景物推送");
-    SceneryPushViewController *sceneryPushPage = [[SceneryPushViewController alloc] init];
-    [self.navigationController pushViewController:sceneryPushPage animated:YES];
+    //只要一触发这句代码系统会自动检测手机蓝牙状态，你必须实现其代理方法，当然得添加<CBCentralManagerDelegate>
+    self.bluetoothManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
 }
 
 //开始进行路线规划
@@ -680,6 +687,56 @@
 }
 - (void)reduceMap {
     self.mapView.zoomLevel -= 0.3;
+}
+
+
+#pragma mark -- 蓝牙模块
+//扫描回调
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+    if((!_isSearchBle) && (RSSI.intValue > -60)){
+        _isSearchBle = true;
+        NSLog(@"靠近蓝牙外设：%@ %@", peripheral.name, RSSI);
+        SceneryPushViewController *sceneryPushPage = [[SceneryPushViewController alloc] initWithSceneryName:@"红罗宝帐"];
+        [self.navigationController pushViewController:sceneryPushPage animated:YES];
+    }
+}
+
+//判断当前手机的蓝牙状态
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    switch (central.state) {
+        case CBManagerStateUnknown: {
+            NSLog(@"CBManagerStateUnknown");  //状态未知
+            break;
+        }
+        case CBManagerStateResetting: {
+            NSLog(@"CBManagerStateResetting");  //重置
+            break;
+        }
+        case CBManagerStateUnsupported: {
+            NSLog(@"CBManagerStateUnsupported");  //不支持
+            break;
+        }
+        case CBManagerStateUnauthorized: {
+            NSLog(@"CBManagerStateUnauthorized");  //未授权
+            break;
+        }
+        case CBManagerStatePoweredOff: {
+            NSLog(@"CBManagerStatePoweredOff");  //关闭
+            break;
+        }
+        case CBManagerStatePoweredOn: {
+            NSLog(@"CBManagerStatePoweredOn");  //开启
+
+            _isSearchBle = false;
+            
+            NSDictionary *scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
+            forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
+
+            [self.bluetoothManager scanForPeripheralsWithServices:nil options:scanOptions];
+            break;
+        }
+    }
 }
 
 @end
